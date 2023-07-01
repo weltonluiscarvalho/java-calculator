@@ -1,9 +1,8 @@
 package javacalculator;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Insets;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -30,33 +29,51 @@ public class MainClass {
 		JButton button8 = new JButton("8");
 		JButton button9 = new JButton("9");
 		JButton button0 = new JButton("0");
+		JButton buttonDecimalDivisor = new JButton(",");
 		JButton buttonPlus = new JButton("+");
 		JButton buttonMinus = new JButton("-");
 		JButton buttonEqual = new JButton("=");
 		
-		JPanel panel = new JPanel();
+		JPanel visorPanel = new JPanel();
+		visorPanel.setBounds(0, 0, 300, 100);
+		visorPanel.setBorder(visorBorder);
+		
+		JPanel numberButtonPanel = new JPanel();
+		numberButtonPanel.setBounds(0, 100, 200, 350);
+		numberButtonPanel.setLayout(new GridLayout(4,3,10,10));
+		
+		JPanel operationButtonPanel = new JPanel();
+		operationButtonPanel.setBounds(200, 100, 100, 350);
+		operationButtonPanel.setLayout(new GridLayout(2,1,10,10));
+		
+		visorPanel.add(label);
+		
+		numberButtonPanel.add(button1);
+		numberButtonPanel.add(button2);
+		numberButtonPanel.add(button3);
+		numberButtonPanel.add(button4);
+		numberButtonPanel.add(button5);
+		numberButtonPanel.add(button6);
+		numberButtonPanel.add(button7);
+		numberButtonPanel.add(button8);
+		numberButtonPanel.add(button9);
+		numberButtonPanel.add(buttonDecimalDivisor);
+		numberButtonPanel.add(button0);
+		numberButtonPanel.add(buttonEqual);
+		
+		operationButtonPanel.add(buttonPlus);
+		operationButtonPanel.add(buttonMinus);
 		
 		JFrame frame = new JFrame();
-		panel.add(label);
-		panel.add(button1);
-		panel.add(button2);
-		panel.add(button3);
-		panel.add(button4);
-		panel.add(button5);
-		panel.add(button6);
-		panel.add(button7);
-		panel.add(button8);
-		panel.add(button9);
-		panel.add(button0);
-		panel.add(buttonPlus);
-		panel.add(buttonMinus);
-		panel.add(buttonEqual);
 		
-		frame.add(panel);
+		frame.add(visorPanel);
+		frame.add(numberButtonPanel);
+		frame.add(operationButtonPanel);
 		
 		frame.setTitle("Java Calculator");
-		frame.setSize(500, 500);
-		frame.setLocationRelativeTo(null);
+		frame.setSize(300, 500);
+		frame.setLayout(null);
+		frame.setLocationRelativeTo(null); //centralizar no centro da tela ao abrir
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
