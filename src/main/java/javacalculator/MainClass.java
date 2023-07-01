@@ -1,6 +1,8 @@
 package javacalculator;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
@@ -10,14 +12,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 public class MainClass {
 
 	public static void main(String[] args) {
 		
 		JLabel label = new JLabel("visor");
-		Border visorBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
-		label.setBorder(visorBorder);
+		label.setHorizontalAlignment(JLabel.CENTER);
+		label.setVerticalAlignment(JLabel.CENTER);
 		
 		JButton button1 = new JButton("1");
 		JButton button2 = new JButton("2");
@@ -35,15 +38,19 @@ public class MainClass {
 		JButton buttonEqual = new JButton("=");
 		
 		JPanel visorPanel = new JPanel();
-		visorPanel.setBounds(0, 0, 300, 100);
+		visorPanel.setLayout(new GridLayout());
+		visorPanel.setPreferredSize(new Dimension(300, 100));
+		Border visorBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 		visorPanel.setBorder(visorBorder);
 		
 		JPanel numberButtonPanel = new JPanel();
-		numberButtonPanel.setBounds(0, 100, 200, 350);
+		numberButtonPanel.setPreferredSize(new Dimension(200, 350));
+		numberButtonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		numberButtonPanel.setLayout(new GridLayout(4,3,10,10));
 		
 		JPanel operationButtonPanel = new JPanel();
-		operationButtonPanel.setBounds(200, 100, 100, 350);
+		operationButtonPanel.setPreferredSize(new Dimension(100, 350));
+		operationButtonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		operationButtonPanel.setLayout(new GridLayout(2,1,10,10));
 		
 		visorPanel.add(label);
@@ -65,16 +72,17 @@ public class MainClass {
 		operationButtonPanel.add(buttonMinus);
 		
 		JFrame frame = new JFrame();
-		
-		frame.add(visorPanel);
-		frame.add(numberButtonPanel);
-		frame.add(operationButtonPanel);
-		
 		frame.setTitle("Java Calculator");
 		frame.setSize(300, 500);
-		frame.setLayout(null);
+		frame.setLayout(new BorderLayout());
+		
+		frame.add(visorPanel, BorderLayout.NORTH);
+		frame.add(numberButtonPanel, BorderLayout.CENTER);
+		frame.add(operationButtonPanel, BorderLayout.EAST);
+		
 		frame.setLocationRelativeTo(null); //centralizar no centro da tela ao abrir
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
 		frame.setVisible(true);
 
 	}
