@@ -21,6 +21,8 @@ public class MainClass {
 		JLabel label = new JLabel("visor");
 		label.setHorizontalAlignment(JLabel.CENTER);
 		label.setVerticalAlignment(JLabel.CENTER);
+		Border visorBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+		label.setBorder(visorBorder);
 		
 		JButton button1 = new JButton("1");
 		JButton button2 = new JButton("2");
@@ -40,8 +42,7 @@ public class MainClass {
 		JPanel visorPanel = new JPanel();
 		visorPanel.setLayout(new GridLayout());
 		visorPanel.setPreferredSize(new Dimension(300, 100));
-		Border visorBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
-		visorPanel.setBorder(visorBorder);
+		visorPanel.setBorder(new EmptyBorder(10, 10, 0, 10));
 		
 		JPanel numberButtonPanel = new JPanel();
 		numberButtonPanel.setPreferredSize(new Dimension(200, 350));
