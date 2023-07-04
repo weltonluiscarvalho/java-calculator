@@ -24,9 +24,18 @@ public class Expression {
 			return "malformed expression";
 		}
 		
-		int resultado;
+		int resultado = Integer.valueOf(numbers[0]);
 		
-		return "XD";
+		for(int i = 1; i < numbers.length; i++) {
+			System.out.println(operators[i - 1]);
+			if(operators[i - 1].equals("+")) {
+				resultado += Integer.valueOf(numbers[i]);
+			} else {
+				resultado -= Integer.valueOf(numbers[i]);
+			}
+		}
+		
+		return String.valueOf(resultado);
 	}
 
 }
