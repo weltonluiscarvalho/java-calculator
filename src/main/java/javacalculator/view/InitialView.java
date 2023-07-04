@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import javacalculator.math.Expression;
+
 public class InitialView extends JFrame implements ActionListener{
 	
 	private static final long serialVersionUID = -2160020859182948123L;
@@ -34,7 +36,7 @@ public class InitialView extends JFrame implements ActionListener{
 		createPanels();
 		createLabel();
 		createButtons();
-		associateListeners(numberButtonPanel.getComponents());
+		associateListeners();
 		//associateListeners(operationButtonPanel.getComponents());
 		configFrame();
 	}
@@ -88,10 +90,24 @@ public class InitialView extends JFrame implements ActionListener{
 		operationButtonPanel.add(buttonMinus);
 	}
 	
-	private void associateListeners(Component[] components) {
-		for (Component component : components) {
+	private void associateListeners() {
+		for (Component component : numberButtonPanel.getComponents()) {
 			JButton button = (JButton) component;
-			button.addActionListener(e -> label.setText(label.getText() + button.getText()));
+			if(Character.isDigit(button.getText().charAt(0))) {
+				button.addActionListener(e -> label.setText(label.getText() + button.getText()));
+			} else if(button.getText() == "=") {
+				Expression expression = new Expression();
+				button.addActionListener(e -> label.setText(expression.calculate(label.getText())));
+			}
+		}
+		
+		for (Component component : operationButtonPanel.getComponents()) {
+			JButton button = (JButton) component;
+			if(button.getText().length() == 1) {
+				button.addActionListener(e -> label.setText(label.getText() + button.getText()));
+			} else {
+				button.addActionListener(e -> label.setText(""));
+			}
 		}
 	}
 	
@@ -114,12 +130,7 @@ public class InitialView extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == buttonDelete) {
-		    String currentText = label.getText();
-		    if (currentText.length() > 0) {
-		        label.setText(currentText.substring(0, currentText.length() - 1));
-		    }
-		}
+		
 		if (e.getSource() == buttonEqual) {
 			if(label.getText().charAt(0) != '+' && label.getText().charAt(0) != '-' && 
 					label.getText().charAt(label.getText().length() - 1) != '+' && 
